@@ -43,8 +43,8 @@ describe('Page model', function() {
   		// done  ???
   	})
 
-		describe('findByTag', function(done) {
-			xit('gets pages with the search tag',function(){
+		describe('findByTag', function() {
+			xit('gets pages with the search tag',function(done){
 				Page.findByTag('Cindy').then(function(pages){
 					expect(pages[0]).to.equal(testPage);
 					done();

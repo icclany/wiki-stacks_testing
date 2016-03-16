@@ -23,7 +23,6 @@ router.post('/', function (req, res, next) {
         name: req.body.name,
         email: req.body.email
     }).then(function (user) {
-
         var newPage = new Page({
             title: req.body.title,
             content: req.body.content,
@@ -35,6 +34,7 @@ router.post('/', function (req, res, next) {
         return newPage.save();
 
     }).then(function (page) {
+        res.status(201);
         res.redirect(page.route);
     }).then(null, next);
 
@@ -48,6 +48,7 @@ router.get('/add', function (req, res) {
 router.get('/search', function (req, res, next) {
 
     var tagToSearch = req.query.search;
+    console.log('TagToSearch',tagToSearch);
 
     Page.findByTag(tagToSearch)
         .then(function (pages) {
