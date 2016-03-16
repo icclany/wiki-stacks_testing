@@ -16,12 +16,12 @@ describe('Page model', function() {
 		})
 
 		describe('route', function() {
-			xit('returns the url_name prepended by "/wiki/"',function(){
+			it('returns the url_name prepended by "/wiki/"',function(){
 				expect(testPage.route).to.equal('/wiki/testTitle');
 			});
 		});
 		describe('renderedContent', function () {
-			xit('converts the markdown-formatted content into HTML',function(){
+			it('converts the markdown-formatted content into HTML',function(){
 				expect(testPage.renderedContent).to.equal('<p>I am using <strong>markdown</strong>.</p>\n')
 			});
 		});
@@ -44,13 +44,13 @@ describe('Page model', function() {
   	})
 
 		describe('findByTag', function() {
-			xit('gets pages with the search tag',function(done){
+			it('gets pages with the search tag',function(done){
 				Page.findByTag('Cindy').then(function(pages){
 					expect(pages[0]).to.equal(testPage);
 					done();
 				}).then(null, done);
 			});
-			xit('does not get pages without the search tag',function(done){
+			it('does not get pages without the search tag',function(done){
 				Page.findByTag().then(function(pages){
 					expect(pages).to.have.lengthOf(0);
 					done();
@@ -82,19 +82,19 @@ describe('Page model', function() {
 
 		describe('findSimilar', function() {
 			console.log("testPage1", testPage1)
-			xit('never gets itself', function(done){
+			it('never gets itself', function(done){
 				testPage1.findSimilar().then(function(matches) {
 					expect(matches.indexOf(testPage1)).to.equal(-1);
 					done();
 				}).then(null, done);
 			});
-			xit('gets other pages with any common tags', function(done){
+			it('gets other pages with any common tags', function(done){
 				testPage1.findSimilar().then(function(matches) {
 					expect(matches).to.have.lengthOf(1);
 					done();
 				}).then(null, done);
 			});
-			xit('does not get other pages without any common tags', function(done){
+			it('does not get other pages without any common tags', function(done){
 				testPage1.findSimilar().then(function(matches) {
 					expect(matches.indexOf(testPage3)).to.equal(-1);
 					done();
@@ -132,20 +132,20 @@ describe('Page model', function() {
 			//  page.create   how to integrate Done
 		});
 
-		xit('errors without title',function(done){
+		it('errors without title',function(done){
 			testPage1.save(function(error){
 				expect(error.errors['title'].message).to.equal('Path `title` is required.');
 				done();
 			});
 			//done();
 		});
-		xit('errors without content',function(done){
+		it('errors without content',function(done){
 			testPage2.save(function(error){
 				expect(error.errors).to.have.property('content');
 				done();
 			});
 		});
-		xit('errors given an invalid status',function(done){
+		it('errors given an invalid status',function(done){
 			testPage3.save(function(error){
 				expect(error.errors).to.have.property('status');
 				done();
@@ -177,7 +177,7 @@ describe('Page model', function() {
   		// done  ???
   		})
 
-		xit('it sets urlTitle based on title before validating',function(done){
+		it('it sets urlTitle based on title before validating',function(done){
 			expect(testPage.urlTitle).to.equal('testTitle__hi');
 			done();
 		});

@@ -34,7 +34,6 @@ router.post('/', function (req, res, next) {
         return newPage.save();
 
     }).then(function (page) {
-        res.status(201);
         res.redirect(page.route);
     }).then(null, next);
 
